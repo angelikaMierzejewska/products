@@ -1,0 +1,8 @@
+<div *ngIf="item">
+  <h1 [style.color]="item.color">{{item.name}}</h1>
+  <p>Description: {{item.desc}}</p>
+  <p>Date: {{item.date | date:'d/M/y'}}</p>
+  <p>Price: {{item.price}}</p>
+</div>
+
+
