@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {ItemService} from '../services/ItemService';
-import {Item} from "../shared/interfaces";
+import { ActivatedRoute } from '@angular/router';
+import { ItemDataService } from '../services/item-data.service';
+import { Item } from '../shared/interfaces';
 
 @Component({
   selector: 'app-item-detail',
@@ -11,17 +11,14 @@ import {Item} from "../shared/interfaces";
 export class ItemDetailComponent implements OnInit {
   private item: Item;
 
-  constructor(    private route: ActivatedRoute, private itemService: ItemService
-  ) { }
+  constructor(private route: ActivatedRoute, private itemService: ItemDataService) {}
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.getItem();
-
   }
 
   getItem(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-   this.item =  this.itemService.getItem(id);
+    this.item = this.itemService.getItem(id);
   }
-
 }

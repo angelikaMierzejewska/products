@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
-import {ItemService} from '../services/ItemService';
-import {Item} from "../shared/interfaces";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ItemDataService } from '../services/item-data.service';
+import { Item } from '../shared/interfaces';
 
 @Component({
   selector: 'app-items',
@@ -9,39 +9,29 @@ import {Item} from "../shared/interfaces";
   styleUrls: ['./items.component.scss']
 })
 export class ItemsComponent implements OnInit {
-
   private items: Item[] = [];
-
-  itemForm = new FormGroup({
-    name: new FormControl(''),
-    color: new FormControl(''),
-    desc: new FormControl(''),
-    price: new FormControl(''),
-
+  private itemForm = this.formBuilder.group({
+    name: ['', Validators.required],
+    color: ['', [Validators.required]],
+    desc: ['', [Validators.required, Validators.minLength(10)]],
+    price: ['', [Validators.required, Validators.pattern('^[0-9]+$')]]
   });
 
-  constructor(private itemService: ItemService) {
-  }
+  constructor(private itemService: ItemDataService, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.getAllItmes();
-
   }
 
   onSubmit() {
-    this.itemService.addItem(this.itemForm.value);
-    this.itemForm.controls.name.setValue('');
-    this.itemForm.controls.color.setValue('');
-    this.itemForm.controls.desc.setValue('');
-    this.itemForm.controls.price.setValue('');
-    this.getAllItmes();
-
+    if (this.itemForm.dirty && this.itemForm.valid) {
+      this.itemService.addItem(this.itemForm.value);
+      this.itemForm.reset();
+      this.getAllItmes();
+    }
   }
 
   getAllItmes() {
     this.items = this.itemService.getItems();
-
   }
-
-
 }

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Item} from '../shared/interfaces';
-
+import { Item } from '../shared/interfaces';
 
 @Injectable()
-export class ItemService {
+export class ItemDataService {
   private items: Item[] = [];
   private id = 1;
 
@@ -11,17 +10,14 @@ export class ItemService {
     item.date = new Date();
     item.id = this.id;
     this.items.push(item);
-    this.id ++;
+    this.id++;
   }
 
-  getItems(){
+  getItems() {
     return this.items;
   }
 
   getItem(id: number): Item | null {
-    return this.items.find(item => item.id === id)
+    return this.items.find(item => item.id === id);
   }
-
-
-
 }
