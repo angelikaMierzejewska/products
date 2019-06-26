@@ -1,18 +1,19 @@
+<div class="main">
+
 <form class="example-form" [formGroup]="itemForm" (ngSubmit)="onSubmit()">
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Name" type="text" formControlName="name">
+    <input matInput placeholder="Name" type="text" formControlName="name" required>
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Color" type="text" formControlName="color">
+    <input matInput placeholder="Color" type="text" formControlName="color" required>
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Description" type="text" formControlName="desc">
+    <input matInput placeholder="Description" type="text" formControlName="desc" required>
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Price" type="number" formControlName="price">
+    <input matInput placeholder="Price" type="number" formControlName="price" required>
   </mat-form-field>
   <button mat-flat-button color="primary" type="submit" [disabled]="!itemForm.valid">Submit</button>
-
 </form>
 
 <h1>items</h1>
@@ -23,3 +24,4 @@
   </div>
 </div>
 
+</div>
